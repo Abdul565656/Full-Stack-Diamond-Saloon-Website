@@ -59,14 +59,14 @@ export async function POST(request: NextRequest) { // 'request' is used
     return NextResponse.json({ message: 'Login successful', token: token }, { status: 200 });
 
   } catch (e) {
-    const error = e as Error; // Type assertion
+    const error = e as Error;
     console.error('[/api/login] - !!! UNHANDLED LOGIN API ERROR !!!:', error.message, error.stack);
-    // Add more specific error checks if needed
     return NextResponse.json({ error: 'Internal Server Error: ' + error.message }, { status: 500 });
   }
 }
 
-export async function GET(_request: NextRequest) { // Prefixed unused 'request'
+// Corrected: _request is defined but never used.
+export async function GET(_request: NextRequest) {
   console.log("====== [/api/login] - GET request received ======");
   return NextResponse.json({ message: "Login API endpoint. Use POST to attempt login." }, { status: 200 });
 }

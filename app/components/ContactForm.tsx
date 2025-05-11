@@ -1,6 +1,6 @@
 // app/components/ContactForm.tsx
 'use client';
-import React, { useState, FormEvent, ChangeEvent } from 'react';
+import React, { useState, ChangeEvent } from 'react';
 // You can import icons from react-icons if you want to add them next to input fields
 // import { FaUser, FaEnvelope, FaPhone, FaPencilAlt } from 'react-icons/fa';
 
