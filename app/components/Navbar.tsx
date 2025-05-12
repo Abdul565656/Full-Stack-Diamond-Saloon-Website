@@ -1,6 +1,6 @@
 'use client'
 
-import { Phone, Mail } from 'lucide-react' // Added X for close icon
+import { Phone, Mail, X } from 'lucide-react' // Added X for close icon
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react' // Import useState
