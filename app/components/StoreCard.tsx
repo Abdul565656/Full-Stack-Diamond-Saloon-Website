@@ -34,7 +34,7 @@ interface Store {
 const storesData: Store[] = [
   {
     id: 'london',
-    name: 'SILVERCLIP LONDON STORE',
+    name: 'Daimond LONDON STORE',
     address: '220 Brompton Rd, Kensington, London SW3 2BB',
     imageUrl: '/images/saloon 5.jpg', // Make sure this image exists in public/images/
     openingHours: [
@@ -46,7 +46,7 @@ const storesData: Store[] = [
     bookingTitle: 'Book London Store',
     contactDetails: [
       { icon: BsTelephoneFill, text: '123 456 7890', href: 'tel:1234567890' },
-      { icon: MdEmail, text: 'email@silverclipsalon.com', href: 'mailto:email@silverclipsalon.com' },
+      { icon: MdEmail, text: 'email@Daimondsalon.com', href: 'mailto:email@Daimondsalon.com' },
     ],
     bookNowLink: '#book-london',
     viewSalonLink: '#view-london',
@@ -65,7 +65,7 @@ const storesData: Store[] = [
     bookingTitle: 'Book Yorkshire Store',
     contactDetails: [
       { icon: BsTelephoneFill, text: '123 456 7890', href: 'tel:1234567890' },
-      { icon: MdEmail, text: 'email@silverclipsalon.com', href: 'mailto:email@silverclipsalon.com' },
+      { icon: MdEmail, text: 'email@Daimondsalon.com', href: 'mailto:email@Daimondsalon.com' },
     ],
     bookNowLink: '#book-yorkshire',
     viewSalonLink: '#view-yorkshire',

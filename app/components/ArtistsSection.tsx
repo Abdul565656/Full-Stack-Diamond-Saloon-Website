@@ -39,7 +39,7 @@ const OurArtistsSection: React.FC = () => {
               Our Artists
             </h2>
             <p className="text-gray-300 leading-relaxed mb-4 text-sm sm:text-base">
-              An award winning Hair Salon based in London. Silverclip salon offers
+              An award winning Hair Salon based in London. Daimond salon offers
               a haven of calm and indulgent luxury lorem ipsum dolor sit amet,
               consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
               labore et dolore magna aliqua diam volutpat.

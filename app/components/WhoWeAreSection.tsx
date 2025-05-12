@@ -41,7 +41,7 @@ const WhoWeAreSection: React.FC = () => {
               WHO WE ARE
             </h2>
             <p className="text-gray-700 leading-relaxed mb-6">
-              An award winning Hair Salon based in UK. Silverclip Salon offers a
+              An award winning Hair Salon based in UK. Daimond Salon offers a
               haven of calm and indulgent luxury lorem ipsum dolor sit amet,
               consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
               labore et dolore magna aliqua diam volutpat.

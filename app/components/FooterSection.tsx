@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import {
   Phone,
   Mail,
@@ -27,8 +28,8 @@ const FooterSection: React.FC = () => {
         <div>
           <h4 className="font-semibold text-sm mb-4">OUR SALONS</h4>
           <ul className="space-y-2 text-sm text-gray-300">
-            <li className="uppercase">SILVERCLIP LONDON STORE</li>
-            <li className="uppercase">SILVERCLIP YORKSHIRE STORE</li>
+            <li className="uppercase">Daimond LONDON STORE</li>
+            <li className="uppercase">Daimond YORKSHIRE STORE</li>
           </ul>
         </div>
 
@@ -36,11 +37,10 @@ const FooterSection: React.FC = () => {
         <div>
           <h4 className="font-semibold text-sm mb-4">SHOP</h4>
           <ul className="space-y-2 text-sm text-gray-300">
-            <li>Our Shop</li>
-            <li>Book Online</li>
-            <li>Vacancies</li>
-            <li>Services</li>
-            <li>Contact us</li>
+            <Link href='/BookOnline'><li>Book Online</li></Link>
+            <Link href='/MeetOurTeam'><li>MeetOurTeam</li></Link>
+            <Link href='/login'><li>Login</li></Link>
+            <Link href='/ContactUs'><li>Contact us</li></Link>
           </ul>
         </div>
 
@@ -48,7 +48,7 @@ const FooterSection: React.FC = () => {
         <div>
           <h4 className="font-semibold text-sm mb-4">HELP & SUPPORT</h4>
           <ul className="space-y-2 text-sm text-gray-300">
-            <li>About us</li>
+            <Link href='/AboutUs'></Link><li>About us</li>
             <li>FAQs</li>
             <li>Terms & Conditions</li>
             <li>Privacy Policy</li>
@@ -66,7 +66,7 @@ const FooterSection: React.FC = () => {
           <div className="flex items-center text-sm text-gray-300 mb-4 space-x-2">
             <Mail size={16} className="text-white" />
             <a href="mailto:email@SilverclipSalon.com" className="underline">
-              email@SilverclipSalon.com
+              email@DaimondSalon.com
             </a>
           </div>
           <div className="flex space-x-4 mt-2">
@@ -85,7 +85,7 @@ const FooterSection: React.FC = () => {
 
       {/* Copyright */}
       <div className="text-center text-gray-500 text-xs mt-6 px-4">
-        © 2022 Silverclip Salon - All Rights Reserved.
+        © 2022 Daimond Salon - All Rights Reserved.
       </div>
     </footer>
   );

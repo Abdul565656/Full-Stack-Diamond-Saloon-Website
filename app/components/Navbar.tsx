@@ -22,7 +22,7 @@ export default function Navbar() {
         </div>
         <div className="flex items-center space-x-1 md:space-x-2">
           <Mail className="w-4 h-4" />
-          <span>email@SilverclipSalon.com</span>
+          <span>email@Daimond salon.com</span>
         </div>
       </div>
 

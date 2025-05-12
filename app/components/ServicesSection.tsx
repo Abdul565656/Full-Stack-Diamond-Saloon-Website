@@ -44,7 +44,7 @@ const ServicesSection: React.FC = () => {
       icon: FaTools,
       title: "WE LOVE TO SERVE",
       description:
-        "Silverclip Salon offers lorem ipsum dolor sit amet, consectetur adipiscing elite eiusmod tempor incides.",
+        "Daimond Salon offers lorem ipsum dolor sit amet, consectetur adipiscing elite eiusmod tempor incides.",
       buttonText: "GET SERVICES",
       buttonStyle: "primary",
     },
@@ -52,7 +52,7 @@ const ServicesSection: React.FC = () => {
       icon: FaGift,
       title: "GIFT VOUCHERS",
       description:
-        "Silverclip Salon offers lorem ipsum dolor sit amet, consectetur adipiscing elite eiusmod tempor incides.",
+        "Daimond Salon offers lorem ipsum dolor sit amet, consectetur adipiscing elite eiusmod tempor incides.",
       buttonText: "BUY A GIFT VOUCHER",
       buttonStyle: "secondary",
     },
