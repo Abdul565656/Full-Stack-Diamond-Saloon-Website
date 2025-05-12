@@ -4,6 +4,23 @@ import { dbConnect } from '@/lib/mongodb'; // Adjust path if necessary
 import ContactMessage from '@/app/models/contactMessageModel'; // Adjust path
 import sgMail from '@sendgrid/mail'; // Optional: if you also want to email admin
 
+// Define a more specific type for SendGrid errors
+interface SendGridError extends Error {
+    response?: {
+        body?: {
+            errors?: Array<{ message: string; field?: string | null; help?: string | null }>;
+        };
+    };
+}
+
+// Define a more specific type for Mongoose-like ValidationErrors
+interface AppValidationError extends Error {
+    errors?: {
+        [key: string]: { message: string; /* other properties if needed */ };
+    };
+}
+
+
 // Configure SendGrid (Optional - if you want email notifications to admin)
 if (process.env.SENDGRID_API_KEY && process.env.ADMIN_EMAIL && process.env.SENDER_EMAIL) {
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
@@ -18,8 +35,9 @@ export async function POST(req: Request) {
     let requestBody;
     try {
         requestBody = await req.json();
-    } catch (parseError) {
-        console.error("API Error (/api/contact): Invalid JSON in request body", parseError);
+    } catch (parseError: unknown) { // Typed as unknown
+        const error = parseError as Error; // Assume it's an Error object
+        console.error("API Error (/api/contact): Invalid JSON in request body", error.message);
         return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
     }
 
@@ -71,8 +89,8 @@ export async function POST(req: Request) {
             try {
                 await sgMail.send(adminNotificationMsg);
                 console.log(`Admin notification email sent for contact message: ${newContactMessage._id}`);
-            } catch (emailError) {
-                const err = emailError as any;
+            } catch (emailErrorCaught: unknown) { // FIX for 75:43
+                const err = emailErrorCaught as SendGridError; // Assert to the defined interface
                 console.error("Error sending admin notification for contact message:", err.response?.body?.errors || err.message);
                 // Don't fail the whole request if admin email fails, just log it.
             }
@@ -84,22 +102,32 @@ export async function POST(req: Request) {
             { status: 201 }
         );
 
-    } catch (error) {
-        const err = error as any; // Type assertion for error handling
-        console.error("API Error in POST /api/contact:", err.message, err.stack);
+    } catch (errorCaught: unknown) { // FIX for 88:30
+        // It's good practice to check if it's an Error instance before accessing properties
+        if (errorCaught instanceof Error) {
+            const err = errorCaught as AppValidationError; // Assert to allow access to .errors if name matches
+            console.error("API Error in POST /api/contact:", err.message, err.stack);
 
-        if (err.name === 'ValidationError' && err.errors) {
-            const validationErrors: { [key: string]: string } = {};
-            Object.keys(err.errors).forEach((key) => {
-                validationErrors[key] = err.errors[key].message;
-            });
-            console.warn("API Mongoose Validation Error (/api/contact):", validationErrors);
-            return NextResponse.json({ error: "Validation failed. Please check your input.", details: validationErrors }, { status: 400 });
+            if (err.name === 'ValidationError' && err.errors) {
+                const validationErrors: { [key: string]: string } = {};
+                Object.keys(err.errors).forEach((key) => {
+                    validationErrors[key] = err.errors![key].message; // Use non-null assertion if sure
+                });
+                console.warn("API Mongoose Validation Error (/api/contact):", validationErrors);
+                return NextResponse.json({ error: "Validation failed. Please check your input.", details: validationErrors }, { status: 400 });
+            }
+
+            return NextResponse.json(
+                { error: "Failed to submit your message. Please try again later.", details: err.message || "Unknown server error" },
+                { status: 500 }
+            );
+        } else {
+            // Handle cases where something other than an Error was thrown
+            console.error("API Error in POST /api/contact: Non-Error object thrown:", errorCaught);
+            return NextResponse.json(
+                { error: "Failed to submit your message. Please try again later.", details: "Unknown server error" },
+                { status: 500 }
+            );
         }
-
-        return NextResponse.json(
-            { error: "Failed to submit your message. Please try again later.", details: err.message || "Unknown server error" },
-            { status: 500 }
-        );
     }
 }

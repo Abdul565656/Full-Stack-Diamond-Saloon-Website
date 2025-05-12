@@ -58,14 +58,16 @@ export async function POST(request: NextRequest) { // 'request' is used
 
     return NextResponse.json({ message: 'Login successful', token: token }, { status: 200 });
 
-  } catch (e) {
-    const error = e as Error;
+  } catch (e: unknown) { // Typed as unknown
+    const error = e as Error; // Assume it's an Error object
     console.error('[/api/login] - !!! UNHANDLED LOGIN API ERROR !!!:', error.message, error.stack);
     return NextResponse.json({ error: 'Internal Server Error: ' + error.message }, { status: 500 });
   }
 }
 
 // Corrected: _request is defined but never used.
+// FIX for 69:27 - Add eslint-disable-next-line comment if '_' prefix is not enough for your config
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export async function GET(_request: NextRequest) {
   console.log("====== [/api/login] - GET request received ======");
   return NextResponse.json({ message: "Login API endpoint. Use POST to attempt login." }, { status: 200 });
